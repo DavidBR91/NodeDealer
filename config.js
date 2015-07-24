@@ -1,3 +1,3 @@
-exports.serverPort = 7777;
+exports.serverPort = 3001;
 
 exports.mongoURL = 'mongodb://localhost/nodedealer'

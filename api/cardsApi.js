@@ -1,3 +1,5 @@
+var utils = require('./utils.js');
+
 function initDeck () {
 
   var deck = [];
@@ -9,23 +11,6 @@ function initDeck () {
   }
 
   return deck;
-}
-
-/* Found at
-  http://stackoverflow.com/questions/4492385/how-to-convert-simple-array-into-two-dimensional-arraymatrix-in-javascript-or */
-function listToMatrix(list, elementsPerSubArray) {
-    var matrix = [], i, k;
-
-    for (i = 0, k = -1; i < list.length; i++) {
-        if (i % elementsPerSubArray === 0) {
-            k++;
-            matrix[k] = [];
-        }
-
-        matrix[k].push(list[i]);
-    }
-
-    return matrix;
 }
 
 function shuffleDeck () {
@@ -41,15 +26,16 @@ function shuffleDeck () {
     deck[i] = itemAtIndex;
   }
 
-  return listToMatrix(deck, 13);
+  return deck;
 }
-
 
 function calculateScore (deck) {
 
   var score = 0;
   var elem;
   var perfectScore = 104;
+
+  deck = utils.listToMatrix(deck, 13);
 
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 13; j++) {
@@ -68,3 +54,6 @@ function calculateScore (deck) {
 
   return (score / perfectScore) * 100;
 }
+
+exports.shuffleDeck = shuffleDeck;
+exports.calculateScore = calculateScore;
