@@ -13,6 +13,50 @@ function initDeck () {
   return deck;
 }
 
+function getSuit (n) {
+
+  var suit;
+
+  switch (n) {
+    case 0:
+      suit = 'spades';
+      break;
+    case 1:
+      suit = 'diams';
+      break;
+    case 2:
+      suit = 'hearts';
+      break;
+    case 3:
+      suit = 'clubs';
+      break;
+  }
+
+  return suit;
+}
+
+function getValue (n) {
+
+  var value = (n + 1) % 13;
+
+  switch (value) {
+    case 1:
+      value = 'A';
+      break;
+    case 11:
+      value = 'J';
+      break;
+    case 12:
+      value = 'Q';
+      break;
+    case 0:
+      value = 'K';
+      break;
+  }
+
+  return value.toString();
+}
+
 function shuffleDeck () {
 
   var deck = initDeck();
@@ -34,6 +78,9 @@ function calculateScore (deck) {
   var score = 0;
   var elem;
   var perfectScore = 104;
+  var newDeck = [];
+  var toInsert;
+  var suit;
 
   deck = utils.listToMatrix(deck, 13);
 
@@ -49,10 +96,20 @@ function calculateScore (deck) {
       if (elem % 13 === j) {
         score++;
       }
+
+      toInsert = {
+        suit: getSuit(Math.floor(elem / 13)),
+        rank: getValue(elem)
+      };
+
+      newDeck.push(toInsert);
     }
   }
 
-  return (score / perfectScore) * 100;
+  return {
+   score: ((score / perfectScore) * 100).toFixed(2),
+   deck: newDeck
+  };
 }
 
 exports.shuffleDeck = shuffleDeck;
