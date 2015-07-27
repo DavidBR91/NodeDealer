@@ -13,6 +13,10 @@ nodeDealerApp.config(['$routeProvider', function($routeProvider) {
     when('/deals/:id', {
       templateUrl: 'partials/deal.html',
       controller: 'dealCtrl'
+    }).
+    when('/deals', {
+      templateUrl: 'partials/deals.html',
+      controller: 'dealsCtrl'
     });
   }
 ]);

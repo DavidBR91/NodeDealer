@@ -2,7 +2,7 @@
   <table class="playingCards simpleCards">
     <tr ng-repeat="i in range(0, 3)">
       <td ng-repeat="j in range(0, 12)">
-        <span class="card" ng-class="['rank-' + deck[i * 13 + j].rank, deck[i * 13 + j].suit]">
+        <span class="card" ng-class="['rank-' + deck[i * 13 + j].rank, deck[i * 13 + j].suit, {highlight: needsHighlight(i*13+j)}]">
               <span class="rank">{{deck[i * 13 + j].rank}}</span>
               <span class="suit">{{concatSuit[i * 13 + j]}}</span>
           </span>
@@ -18,7 +18,7 @@
       <a ng-href="/#/" class="btn btn-primary btn-md" role="button">New Game</a>
     </div>
     <div class="col-sm-4">
-      <a ng-href="/deals" class="btn btn-primary btn-md" role="button">Deals History</a>
+      <a ng-href="/#/deals" class="btn btn-primary btn-md" role="button">Deals History</a>
     </div>
   </div>
 

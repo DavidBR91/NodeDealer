@@ -18,10 +18,14 @@ nodeDealerControllers.controller('dealCtrl', ['$scope', 'serviceObj',
   function ($scope, serviceObj) {
 
     $scope.score = serviceObj.getValue().score + ' %';
-    $scope.deck = serviceObj.getValue().deck;
+    $scope.deck = serviceObj.getValue().deckConfig;
 
     $scope.concatSuit = function (pos) {
       return '&' + $scope.deck[pos].suit + ';';
+    }
+
+    $scope.needsHighlight = function (pos) {
+      return $scope.deck[pos].highlight;
     }
 
     /* Found at http://stackoverflow.com/questions/11873570/angularjs-for-loop-with-numbers-ranges */
@@ -32,5 +36,25 @@ nodeDealerControllers.controller('dealCtrl', ['$scope', 'serviceObj',
       return input;
     };
 
+  }
+]);
+
+nodeDealerControllers.controller('dealsCtrl', ['$scope', '$http', '$location', 'serviceObj',
+  function ($scope, $http, $location, serviceObj) {
+
+    $scope.dealList = [];
+
+    $http.get('/deals').success(function (result) {
+      $scope.dealList = result.deals;
+    }).error(function (error) {
+      alert(error);
+    });
+
+    $scope.showDeal = function (deal) {
+
+      serviceObj.setValue(deal);
+      $location.url('/deals/' + deal._id);
+
+    }
   }
 ]);

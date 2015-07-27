@@ -1,0 +1,20 @@
+<div class="wrapperCenter">
+  <table class ="table table-stripped table-bordered table-hover">
+    <thead>
+      <tr>
+        <td>DealID</td>
+        <td>Score</td>
+        <td>Date</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="deal in dealList">
+        <td>
+          <a href ng-click="showDeal(deal)">{{deal._id}}</a>
+        </td>
+        <td>{{deal.score}}</td>
+        <td>{{deal.date}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

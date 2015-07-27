@@ -99,7 +99,8 @@ function calculateScore (deck) {
 
       toInsert = {
         suit: getSuit(Math.floor(elem / 13)),
-        rank: getValue(elem)
+        rank: getValue(elem),
+        highlight: false
       };
 
       newDeck.push(toInsert);

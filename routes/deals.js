@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 var Deal = require('../models/Deal');
 var deckApi = require('../api/cardsApi.js');
+var pairsApi = require('../api/pairsApi.js');
 
 router.post('/', function (req, res) {
 
   var deck = deckApi.shuffleDeck();
   var dealObj = deckApi.calculateScore(deck);
+  dealObj.deck = pairsApi.getPairs(dealObj.deck);
 
   var deal = new Deal ({
     score: dealObj.score,
@@ -20,7 +22,7 @@ router.post('/', function (req, res) {
       res.status(200).send({
         id: result._id,
         score: result.score,
-        deck: result.deckConfig
+        deckConfig: result.deckConfig
       });
     }
   });
