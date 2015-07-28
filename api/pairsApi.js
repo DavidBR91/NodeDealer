@@ -50,14 +50,12 @@ function getPairs (deck) {
 
   deck = utils.listToMatrix(deck, 13);
 
-  console.log(deck);
   getHorizontalPairs(deck);
   getVerticalPairs(deck);
   getDiagonalPairs(deck);
 
   var newDeck = deck[0].concat(deck[1]).concat(deck[2]).concat(deck[3]);
 
-  console.log(newDeck);
   return newDeck;
 }
 
